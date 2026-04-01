@@ -1,0 +1,96 @@
+Optimizing tool selection...Use this master prompt:
+
+You are a senior Android architect and product engineer. Build a production-ready Android app called SecureQuiz, replicating the complete experience of a secure anti-cheat quiz platform (teacher creates quiz, student attempts via invite link, teacher monitors live dashboard).  
+I need full implementation, not pseudo-code.
+
+Goal  
+Create a modern, scalable Android app with beautiful UI, robust anti-cheat logic, real-time submissions, and admin analytics.
+
+Tech stack (required)  
+- Kotlin, Jetpack Compose, Material 3  
+- MVVM + Clean Architecture  
+- Hilt for DI  
+- Navigation Compose  
+- Retrofit or Ktor client  
+- Coroutines + Flow  
+- Room for local cache/offline  
+- Supabase backend (Auth, Postgres, Realtime, Row Level Security)  
+- Unit tests + UI tests
+
+Core features  
+1) Authentication  
+- Google sign-in for teachers  
+- Student join flow via quiz invite link
+
+2) Teacher app flow  
+- Create quiz (title, duration, max violations)  
+- Add/edit/remove/duplicate questions and options  
+- Publish quiz and generate student link + dashboard link  
+- View all created quizzes  
+- Live submissions dashboard with filters (all, flagged, auto-submit, perfect score)  
+- Export results as Excel/CSV
+
+3) Student app flow  
+- Open invite link and join quiz  
+- Registration (name, student ID, optional email)  
+- Quiz instructions + consent checkbox  
+- Question navigation with timer and progress  
+- Submit manually or auto-submit
+
+4) Anti-cheat and proctoring  
+- Track app background/foreground switches  
+- Track fullscreen exits (or immersive mode exits)  
+- Block screenshots/recording where possible (FLAG_SECURE)  
+- Log suspicious events with timestamps  
+- Auto-submit when violation threshold reached  
+- Clear warning dialogs and final warning state
+
+5) Result and review  
+- Score calculation, ring/progress visualization  
+- Show violations and device info  
+- Review answers (correct vs selected vs skipped)  
+- Graceful retry if submission persistence fails
+
+6) Reliability and edge cases  
+- Invalid/expired invite link handling with clear support codes  
+- Duplicate submission prevention per quiz + student ID  
+- Offline state indicator and retry queue  
+- Session recovery after app restart  
+- Idempotent submission API handling
+
+Backend and data model (required)  
+- Provide Supabase SQL schema and policies for quizzes and submissions  
+- Add function to fetch quiz by invite ID  
+- Add unique index for quiz_id + normalized student_id  
+- RLS policies so only quiz owners can view submissions, students can submit attempts
+
+Architecture expectations  
+- Clear package structure by feature and layer  
+- Repository interfaces and implementations  
+- Use-cases for major operations  
+- Strong validation and error mapping  
+- No hardcoded secrets in source
+
+UI/UX expectations  
+- Professional, bold, modern design  
+- Smooth animations and loading states  
+- Works across phone and tablet  
+- Accessibility-friendly (content descriptions, scalable text, contrast)
+
+What to output  
+- Step-by-step implementation plan  
+- Complete project folder structure  
+- All key source files with full code  
+- Gradle setup and dependencies  
+- SQL migration files  
+- Sample seed data  
+- Test cases and how to run them  
+- Deployment and release notes
+
+Execution style  
+- Generate in phases: Phase 1 architecture, Phase 2 backend schema, Phase 3 core app, Phase 4 anti-cheat, Phase 5 dashboard/export, Phase 6 testing/hardening  
+- After each phase, list exactly what was created and what remains  
+- Do not skip code details or say “implement similarly”  
+- If any Android limitation exists, provide best practical workaround and continue implementation
+
+If you want, I can also give you a second prompt tailored for Flutter or React Native with the same product behavior.
